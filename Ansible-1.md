@@ -242,7 +242,7 @@ backup:在覆盖之前将原文件备份，备份文件包含时间信息。有�
 登录被控制机器其中一台查看
 [root@ansible-web1 ~]# cat /opt/a.txt.15301.2019-09-01\@00\:35\:18~
 
-[root@ansible-server ~]# ansible weball -m shell -a 'mv /mnt/qf.txt /tmp' -o
+[root@ansible-server ~]# ansible weball -m shell -a 'mv /mnt/auka.txt /tmp' -o
 移动被控制节点的文件
 ```
 
@@ -287,7 +287,7 @@ directory:创建一个新的目录，当目录存在时不会进行修改
 [root@ansible-server ~]# ansible webservers1 -m file -a 'path=/tmp/youngfit1.txt mode=777 state=touch'
 [root@ansible-server ~]# ansible ansible-web2 -m file -a 'path=/tmp/youngfit2.txt mode=777 owner=nginx state=touch'
 #创建一个目录
-[root@ansible-server ~]# ansible webservers1 -m file -a 'path=/tmp/qf mode=777 state=directory' 
+[root@ansible-server ~]# ansible webservers1 -m file -a 'path=/tmp/auka mode=777 state=directory' 
 
 被控节点ansible-web2操作：
 [root@ansible-web2 tmp]# cd /opt/
