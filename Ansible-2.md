@@ -393,6 +393,36 @@ source /etc/profile    #加上此行，是为了启动加载到环境变量
     shell: nohup /usr/local/tomcat/bin/startup.sh &
 ```
 
+```shell
+ - hosts: weball
+   user: root
+   tasks:
+   - name: copy jak tar
+     copy: src=/root/jdk-8u211-linux-x64.tar.gz dest=/usr/local/
+   - name: copy tomcat tar
+     copy: src=/root/apache-tomcat-8.5.45.tar.gz dest=/usr/local
+   - name: unzip jdk
+     shell: tar -xvzf /usr/local/jdk-8u211-linux-x64.tar.gz -C /usr/local
+   - name: unzip tomcat
+     shell: tar -xvzf /usr/local/apache-tomcat-8.5.45.tar.gz -C /usr/local
+   - name: rename jdk dir
+     shell: mv /usr/local/jdk1.8.0_211 /usr/local/java
+   - name: rename tomcat dir
+     shell: mv /usr/local/apache-tomcat-8.5.45 /usr/local/tomcat
+   - name: clean tomcat webapps
+     shell: rm -rf /usr/local/tomcat/webapps/*
+   - name: configure enviroment
+     shell: echo "JAVA_HOME=/usr/local/java">> /etc/profile && echo 'PATH=$JAVA_HOME/bin:$PATH'>> /etc/profile
+   - name: copy jenkins war
+     copy: src=/root/jenkins.war dest=/usr/local/tomcat/webapps
+   - name: copy startup.sh
+     copy: src=/root/startup.sh dest=/usr/local/tomcat/bin
+     notify: start tomcat
+   handlers:
+   - name: start tomcat
+     shell: nohup /usr/local/tomcat/bin/startup.sh &
+```
+
 
 
 ## 查资料（懂得多，面试说的多，走得快）：
